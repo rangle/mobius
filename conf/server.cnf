@@ -1,0 +1,30 @@
+HOME     = .
+RANDFILE = $ENV::HOME/.rnd
+
+####################################################################
+[ req ]
+default_bits       = 2048
+default_keyfile    = $ENV::MOBIUS_KEY_FILE
+distinguished_name = server_distinguished_name
+req_extensions     = server_req_extensions
+string_mask        = utf8only
+prompt             = no
+
+####################################################################
+[ server_distinguished_name ]
+C            = $ENV::MOBIUS_DN_COUNTRY
+ST           = $ENV::MOBIUS_DN_STATE
+L            = $ENV::MOBIUS_DN_CITY
+O            = $ENV::MOBIUS_DN_ORG
+CN           = $ENV::MOBIUS_DN_COMMON_NAME
+emailAddress = $ENV::MOBIUS_DN_EMAIL
+
+####################################################################
+[ server_req_extensions ]
+subjectKeyIdentifier = hash
+basicConstraints     = CA:FALSE
+keyUsage             = digitalSignature, keyEncipherment
+subjectAltName       = $ENV::MOBIUS_SAN
+nsComment            = "OpenSSL Generated Certificate"
+
+####################################################################
